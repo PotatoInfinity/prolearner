@@ -73,22 +73,6 @@
             transition: background-color 0.8s cubic-bezier(0.16, 1, 0.3, 1), color 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* Premium Grain/Noise Texture Overlay - 2025 Trend */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0.035;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-            background-repeat: repeat;
-            mix-blend-mode: overlay;
-        }
-
         body.theme-dark {
             --bg-page: #050505;
             --text-main: #ffffff;
@@ -2784,6 +2768,66 @@
             color: var(--accent-green);
             transform: translateX(5px);
         }
+
+        /* --- PERFORMANCE SAVER (Add to bottom of CSS) --- */
+
+        @media (max-width: 1024px) {
+
+            /* 1. KILL THE NOISE (Heaviest effect) */
+            body::before {
+                display: none !important;
+            }
+
+            /* 2. KILL THE GLASS (2nd Heaviest effect) 
+       Phones hate calculating blur behind moving objects.
+       We replace it with a solid, slightly transparent white. */
+            .nav-pill,
+            .browser-mockup,
+            .panel-header,
+            .player-controls,
+            .modal-window,
+            .coming-soon-card,
+            .btn-primary::before,
+            .video-controls-panel {
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                background: rgba(255, 255, 255, 0.95) !important;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05) !important;
+            }
+
+            /* 3. STOP 3D TILTING 
+       Prevents repainting the layer on scroll/touch */
+            .tilt-card,
+            .tech-card,
+            .demo-browser-window {
+                transform: none !important;
+                transition: none !important;
+                perspective: none !important;
+            }
+
+            /* 4. REMOVE GLOWS */
+            .cursor-glow,
+            .glow-orb,
+            .footer-glow {
+                display: none !important;
+            }
+
+            /* 5. SIMPLIFY SHADOWS 
+       Large, spread-out shadows are expensive to render */
+            * {
+                box-shadow: none !important;
+                text-shadow: none !important;
+            }
+
+            /* Re-add simple shadows for depth where needed */
+            .nav-pill,
+            .card,
+            .btn,
+            .modal-window {
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important;
+                border: 1px solid #e5e7eb !important;
+            }
+        }
     </style>
 </head>
 
@@ -2823,7 +2867,7 @@
 
     <!-- Hero -->
     <section class="hero-section skew-container" id="hero">
-        <div class="version-badge"><span></span> v3.0 Cross-Platform</div>
+        <div class="version-badge"><span></span> v1.3 Cross-Platform</div>
         <h1 class="reveal-on-scroll">Master Everything.<br><span>Anywhere. Anytime.</span></h1>
         <p class="lead reveal-on-scroll">The personalized AI platform that turns your world into a classroom. Learn from
             any content, on any device—not just valid for exams, but for life.</p>
@@ -3159,10 +3203,9 @@
                                         <span
                                             style="width: 3px; height: 14px; background: #10b981; border-radius: 2px; animation: eq 1s ease-in-out infinite 0.1s;"></span>
                                         <span
-                                            style="width: 3px; height: 6px; background: #10b981; border-radius: 2px; animation: eq 1s ease-in-out infinite 0.2s;"></span>
-                                    </span>
-                                    <span class="video-status"
-                                        style="font-size: 0.8rem; letter-spacing: 0.5px;">Speaking...</span>
+                                            style="width: 3px; height: 6px; background: #10b981; border-radius: 2px; animation: eq 1s ease-in-out infinite 0.2s;">
+                                            <span class="video-status"
+                                                style="font-size: 0.8rem; letter-spacing: 0.5px;"></span>
                                 </div>
                             </div>
                         </div>
@@ -4619,74 +4662,184 @@
         lucide.createIcons();
 
         // Cursor Glow
+        // Cursor Glow (Optimized)
         const cursorGlow = document.querySelector('.cursor-glow');
-        let cursorX = 0, cursorY = 0, currentX = 0, currentY = 0;
-        document.addEventListener('mousemove', (e) => { cursorX = e.clientX; cursorY = e.clientY; });
-        function animateCursor() {
-            currentX += (cursorX - currentX) * 0.1;
-            currentY += (cursorY - currentY) * 0.1;
-            cursorGlow.style.left = `${currentX}px`;
-            cursorGlow.style.top = `${currentY}px`;
-            requestAnimationFrame(animateCursor);
+        const isMobile = window.innerWidth < 768;
+
+        if (cursorGlow && !isMobile) {
+            let cursorX = -100, cursorY = -100, currentX = -100, currentY = -100;
+            let isMoving = false;
+
+            document.addEventListener('mousemove', (e) => {
+                cursorX = e.clientX;
+                cursorY = e.clientY;
+                if (!isMoving) {
+                    isMoving = true;
+                    requestAnimationFrame(animateCursor);
+                }
+            }, { passive: true });
+
+            function animateCursor() {
+                const dx = cursorX - currentX;
+                const dy = cursorY - currentY;
+
+                currentX += dx * 0.15;
+                currentY += dy * 0.15;
+
+                // Use translate3d for GPU acceleration
+                cursorGlow.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%)`;
+
+                // Stop animation when close enough to save resources
+                if (Math.abs(dx) < 0.1 && Math.abs(dy) < 0.1) {
+                    isMoving = false;
+                } else {
+                    requestAnimationFrame(animateCursor);
+                }
+            }
+        } else if (cursorGlow) {
+            cursorGlow.style.display = 'none';
         }
-        animateCursor();
 
         // Scroll Interactions (Optimized)
+        // Centralized Scroll Manager
         const stickySection = document.querySelector('.scroll-container');
         const scrollTrack = document.getElementById('scrollTrack');
-        const techCards = document.querySelectorAll('.tech-card');
+        const contextWrapper = document.getElementById('contextWrapper');
+        const contextText = document.getElementById('contextText');
+        const contextWindow = document.getElementById('contextWindow');
+        const contextPopup = document.getElementById('contextPopup');
+        const ctaSection = document.getElementById('finalCta');
+        const ctaText = document.getElementById('ctaText');
 
-        let isScrolling = false;
+        let scrollY = window.scrollY;
 
-        function animateHorizontalScroll() {
-            if (!stickySection || !scrollTrack) {
-                isScrolling = false;
-                return;
+        // Cache dimensions
+        let dims = {
+            viewportHeight: window.innerHeight,
+            trackWidth: scrollTrack ? scrollTrack.scrollWidth : 0,
+            stickyTop: 0, stickyHeight: 0,
+            contextTop: 0, contextHeight: 0,
+            ctaTop: 0, ctaHeight: 0
+        };
+
+        function updateDims() {
+            dims.viewportHeight = window.innerHeight;
+            dims.viewportWidth = window.innerWidth;
+            if (scrollTrack) dims.trackWidth = scrollTrack.scrollWidth;
+            if (stickySection) {
+                const r = stickySection.getBoundingClientRect();
+                dims.stickyHeight = stickySection.offsetHeight;
+                dims.stickyTop = r.top + window.scrollY;
             }
-
-            const rect = stickySection.getBoundingClientRect();
-            const sectionHeight = stickySection.offsetHeight - window.innerHeight;
-
-            // Only calc if in view or near view
-            if (rect.top > window.innerHeight || rect.bottom < 0) {
-                isScrolling = false;
-                return;
+            if (contextWrapper) {
+                const r = contextWrapper.getBoundingClientRect();
+                dims.contextHeight = contextWrapper.offsetHeight;
+                dims.contextTop = r.top + window.scrollY;
             }
-
-            let scrollDistance = -rect.top;
-            let progress = Math.max(0, Math.min(1, scrollDistance / sectionHeight));
-
-            const trackWidth = scrollTrack.scrollWidth;
-            // Subtract window width so we stop exactly at the end
-            const translateX = progress * (trackWidth - window.innerWidth + 40); // +40 for padding
-
-            scrollTrack.style.transform = `translateX(-${translateX}px)`;
-
-            // Optimize focus class toggle
-            const viewportCenter = window.innerWidth / 2;
-            techCards.forEach(card => {
-                const cardRect = card.getBoundingClientRect();
-                const cardCenter = cardRect.left + (cardRect.width / 2);
-                const dist = Math.abs(viewportCenter - cardCenter);
-                if (dist < 350) { // Wider threshold
-                    if (!card.classList.contains('in-focus')) card.classList.add('in-focus');
-                } else {
-                    if (card.classList.contains('in-focus')) card.classList.remove('in-focus');
-                }
-            });
-
-            isScrolling = false;
+            if (ctaSection) {
+                const r = ctaSection.getBoundingClientRect();
+                dims.ctaHeight = ctaSection.offsetHeight;
+                dims.ctaTop = r.top + window.scrollY;
+            }
         }
 
+        // Debounced resize
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(updateDims, 100);
+        });
+        setTimeout(updateDims, 500); // Initial check
+
+        function handleScroll() {
+            scrollY = window.scrollY;
+            updateNav();
+            // 1. Horizontal Scroll
+            if (stickySection && scrollTrack) {
+                const relTop = dims.stickyTop - scrollY;
+                if (relTop <= dims.viewportHeight && relTop + dims.stickyHeight >= 0) {
+                    const scrollDist = -relTop;
+                    const sectionScrollable = dims.stickyHeight - dims.viewportHeight;
+                    const progress = Math.max(0, Math.min(1, scrollDist / sectionScrollable));
+                    const translateX = progress * (dims.trackWidth - dims.viewportWidth + 40);
+                    scrollTrack.style.transform = `translate3d(-${translateX}px, 0, 0)`;
+                }
+            }
+
+            // 2. Context Section
+            if (contextWrapper) {
+                const relTop = dims.contextTop - scrollY;
+                if (relTop <= dims.viewportHeight && relTop + dims.contextHeight >= 0) {
+                    const totalScrollHeight = dims.contextHeight - dims.viewportHeight;
+                    const progress = Math.max(0, Math.min(1, -relTop / totalScrollHeight));
+
+                    if (progress < 0.4) {
+                        const p1 = progress / 0.4;
+                        contextText.style.opacity = 1 - p1;
+                        contextText.style.transform = `translate3d(-${p1 * 50}px, 0, 0)`;
+                        if (dims.viewportWidth > 768) {
+                            contextWindow.style.transform = `translate3d(-${p1 * 50}%, 0, 0) scale(${1 + p1 * 0.1}) rotateY(${p1 * -5}deg)`;
+                        }
+                        contextPopup.style.opacity = 0;
+                        contextPopup.style.transform = 'translate3d(-50%, -50%, 0) scale(0.5)';
+                    } else {
+                        contextText.style.opacity = 0;
+                        if (dims.viewportWidth > 768) {
+                            contextWindow.style.transform = `translate3d(-50%, 0, 0) scale(1.1) rotateY(-5deg)`;
+                        }
+                        const p2 = Math.min(1, (progress - 0.4) / 0.4);
+                        contextPopup.style.opacity = p2;
+                        contextPopup.style.transform = `translate3d(-50%, -50%, 0) scale(${0.5 + p2 * 0.5})`;
+                    }
+                }
+            }
+
+            // 3. CTA Animation
+            if (ctaSection) {
+                const relTop = dims.ctaTop - scrollY;
+                // Only animate if entering view
+                if (relTop < dims.viewportHeight && relTop > -dims.ctaHeight) {
+                    const progress = (dims.viewportHeight - relTop) / dims.ctaHeight;
+                    if (progress < 0.2) {
+                        ctaText.style.opacity = Math.max(0, progress * 5); // Simple fade in
+                        // Reduce blur significantly for performance
+                        ctaText.style.filter = 'blur(4px)';
+                        ctaText.style.transform = 'scale(0.9)';
+                    } else if (progress >= 0.2 && progress <= 0.85) {
+                        const p = (progress - 0.2) / 0.65;
+                        ctaText.style.opacity = Math.min(1, p * 1.5);
+                        ctaText.style.filter = `blur(${Math.max(0, 4 - (p * 4))}px)`;
+                        ctaText.style.transform = `scale(${0.9 + (p * 0.1)}) translateY(${20 - (p * 20)}px)`;
+                    } else {
+                        ctaText.style.opacity = '1';
+                        ctaText.style.filter = 'none';
+                        ctaText.style.transform = 'scale(1) translateY(0px)';
+                    }
+                }
+            }
+        }
+
+        // Ticking loop for scroll
+        let ticking = false;
         window.addEventListener('scroll', () => {
-            if (!isScrolling) {
-                isScrolling = true;
-                requestAnimationFrame(animateHorizontalScroll);
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    handleScroll();
+                    ticking = false;
+                });
+                ticking = true;
             }
         }, { passive: true });
 
-        // Initial call
-        animateHorizontalScroll();
+        // IntersectionObserver for Tech Cards Focus (Replaces the loop in scroll)
+        const techCards = document.querySelectorAll('.tech-card');
+        const focusObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('in-focus');
+                else entry.target.classList.remove('in-focus');
+            });
+        }, { root: null, threshold: 0.6, rootMargin: "-10% 0px -10% 0px" });
+        techCards.forEach(card => focusObserver.observe(card));
 
         // Populate Heatmap
         const heatmap = document.getElementById('heatmap');
@@ -4820,8 +4973,6 @@
                 moveHighlight(link);
             });
         });
-
-        window.addEventListener('scroll', updateNav);
         // Initial call to set position
         setTimeout(updateNav, 100);
 
@@ -4843,26 +4994,9 @@
             card.addEventListener('mouseleave', () => card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)');
         });
 
-        // CTA Animation
-        const ctaSection = document.getElementById('finalCta');
-        const ctaText = document.getElementById('ctaText');
-        function animateCta() {
-            if (!ctaSection || !ctaText) return;
-            const rect = ctaSection.getBoundingClientRect();
-            let progress = (window.innerHeight - rect.top) / rect.height;
-            if (progress < 0.2) {
-                ctaText.style.opacity = '0'; ctaText.style.filter = 'blur(20px)'; ctaText.style.transform = 'scale(0.8) translateY(50px)';
-            } else if (progress >= 0.2 && progress <= 0.85) {
-                const p = (progress - 0.2) / 0.65;
-                ctaText.style.opacity = Math.min(1, p * 1.5);
-                ctaText.style.filter = `blur(${Math.max(0, 20 - (p * 20))}px)`;
-                ctaText.style.transform = `scale(${0.8 + (p * 0.2)}) translateY(${50 - (p * 50)}px)`;
-            } else {
-                ctaText.style.opacity = '1'; ctaText.style.filter = 'blur(0px)'; ctaText.style.transform = 'scale(1) translateY(0px)';
-            }
-            requestAnimationFrame(animateCta);
-        }
-        animateCta();
+        // CTA Animation logic moved to handleScroll
+        // Kept empty structure if needed for legacy ref
+        function animateCta() { }
 
         // 3D Mockup Logic
         (function () {
@@ -4935,70 +5069,8 @@
             streakObserver.observe(streakContainer);
         }
 
-        // --- Context is King Scroll Animation ---
-        const contextWrapper = document.getElementById('contextWrapper');
-        const contextText = document.getElementById('contextText');
-        const contextWindow = document.getElementById('contextWindow');
-        const contextPopup = document.getElementById('contextPopup');
-        const contextVisual = document.getElementById('contextVisual');
+        // Consolidate in handleScroll
 
-        function animateContextSection() {
-            if (!contextWrapper) return;
-
-            const rect = contextWrapper.getBoundingClientRect();
-            const viewportHeight = window.innerHeight;
-            const totalScrollHeight = rect.height - viewportHeight;
-
-            // Calculate progress: 0 when top of wrapper hits top of viewport, 1 when bottom hits bottom
-            // Actually, we want it to start when the sticky content locks.
-            // rect.top becomes 0 when it locks.
-            // It stays 0 until we scroll totalScrollHeight.
-            // So progress = -rect.top / totalScrollHeight
-
-            let progress = -rect.top / totalScrollHeight;
-            progress = Math.max(0, Math.min(1, progress));
-
-            // Phase 1: 0.0 - 0.4 -> Text fades out, Window moves to center
-            if (progress < 0.4) {
-                const p1 = progress / 0.4; // 0 to 1
-
-                // Fade out text
-                contextText.style.opacity = 1 - p1;
-                contextText.style.transform = `translateX(-${p1 * 50}px)`;
-
-                // Move window to center (it's currently in the right half)
-                // We can use transform translateX to move it left.
-                // In desktop layout, visual is flex:1.
-                // Let's approximate centering.
-                if (window.innerWidth > 768) {
-                    contextWindow.style.transform = `translateX(-${p1 * 50}%) scale(${1 + p1 * 0.1}) rotateY(${p1 * -5}deg)`;
-                }
-
-                // Hide popup
-                contextPopup.style.opacity = 0;
-                contextPopup.style.transform = 'translate(-50%, -50%) scale(0.5)';
-            }
-            // Phase 2: 0.4 - 0.8 -> Popup reveals
-            else {
-                // Keep text hidden and window centered
-                contextText.style.opacity = 0;
-                contextText.style.transform = `translateX(-50px)`;
-                if (window.innerWidth > 768) {
-                    contextWindow.style.transform = `translateX(-50%) scale(1.1) rotateY(-5deg)`;
-                }
-
-                const p2 = (progress - 0.4) / 0.4; // 0 to 1
-                const clampedP2 = Math.min(1, p2);
-
-                // Reveal popup
-                contextPopup.style.opacity = clampedP2;
-                contextPopup.style.transform = `translate(-50%, -50%) scale(${0.5 + clampedP2 * 0.5})`;
-            }
-        }
-
-        window.addEventListener('scroll', () => {
-            requestAnimationFrame(animateContextSection);
-        });
     </script>
 </body>
 
