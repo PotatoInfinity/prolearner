@@ -10,7 +10,7 @@
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml"
-        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='24' height='24' rx='4' fill='url(%23grad)'/%3E%3Cpath d='M22 10v6M2 10l10-5 10 5-10 5z'/%3E%3Cpath d='M6 12v5c3 3 9 3 12 0v-5'/%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%2310b981'/%3E%3Cstop offset='100%25' style='stop-color:%23059669'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E">
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='24' height='24' rx='4' fill='url(%23grad)'/%3E%3Cpath d='M22 10v6M2 10l10-5 10 5-10 5z'/%3E%3Cpath d='M6 12v5c3 3 9 3 12 0v-5'/%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%2368D391'/%3E%3Cstop offset='100%25' style='stop-color:%232F855A'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,21 +23,31 @@
 
     <style>
         :root {
-            /* Light Theme Palette */
-            --bg-page: #fcfcfc;
-            --bg-card: #ffffff;
-            --border-base: rgba(0, 0, 0, 0.08);
-            --text-main: #171717;
-            --text-muted: #666666;
-            --accent-blue: #2563eb;
-            --accent-green: #10b981;
+            /* Matte Dreamy Green Theme - Updated */
+            --bg-page: #F3F6F4;
+            /* Soft matte educational green-grey */
+            --bg-card: #FFFFFF;
+            --border-base: rgba(46, 50, 46, 0.08);
+            /* Subtle border */
 
-            --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
-            --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.01);
-            --shadow-modal: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --text-main: #2E2E2E;
+            /* Chalkcoal: Deep matte charcoal */
+            --text-muted: #5E635E;
+            /* Muted chalk-grey */
+
+            --accent-green: #68D391;
+            /* Soft matte green */
+            --accent-green-dim: rgba(104, 211, 145, 0.15);
+            --accent-green-dark: #2F855A;
+
+            /* Premium Colored Shadows - Green-tinted for brand cohesion */
+            --shadow-card: 0 4px 20px -2px rgba(104, 211, 145, 0.08), 0 2px 8px -2px rgba(47, 133, 90, 0.04);
+            --shadow-hover: 0 20px 30px -5px rgba(104, 211, 145, 0.15), 0 10px 10px -5px rgba(47, 133, 90, 0.08);
+            --shadow-modal: 0 25px 50px -12px rgba(47, 133, 90, 0.25);
+            --shadow-btn-active: 0 2px 8px -2px rgba(104, 211, 145, 0.3);
 
             --ease-elastic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-smooth: cubic-bezier(0.2, 0.9, 0.3, 1);
 
             --section-spacing: 140px 24px;
             --section-spacing-mobile: 80px 20px;
@@ -61,6 +71,22 @@
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             transition: background-color 0.8s cubic-bezier(0.16, 1, 0.3, 1), color 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Premium Grain/Noise Texture Overlay - 2025 Trend */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.035;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            mix-blend-mode: overlay;
         }
 
         body.theme-dark {
@@ -121,7 +147,7 @@
             left: 0;
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%);
+            background: radial-gradient(circle, var(--accent-green-dim) 0%, transparent 70%);
             transform: translate(-50%, -50%);
             pointer-events: none;
             z-index: -1;
@@ -143,7 +169,7 @@
             position: fixed;
             width: 800px;
             height: 800px;
-            background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, transparent 60%);
+            background: radial-gradient(circle, var(--accent-green-dim) 0%, transparent 60%);
             filter: blur(80px);
             z-index: -1;
             pointer-events: none;
@@ -167,32 +193,36 @@
             background: rgba(255, 255, 255, 0.65);
             backdrop-filter: blur(24px) saturate(180%);
             -webkit-backdrop-filter: blur(24px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.6);
+            /* Crisp border for glassmorphic separation */
+            border: 1.5px solid rgba(104, 211, 145, 0.15);
             padding: 5px 6px 5px 8px;
             border-radius: 100px;
             display: flex;
             align-items: center;
             gap: 8px;
             box-shadow:
-                0 4px 6px -1px rgba(0, 0, 0, 0.02),
-                0 12px 24px -6px rgba(0, 0, 0, 0.05),
-                inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+                0 4px 6px -1px rgba(104, 211, 145, 0.04),
+                0 12px 24px -6px rgba(47, 133, 90, 0.08),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.5),
+                0 0 0 1px rgba(104, 211, 145, 0.08);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .nav-pill:hover {
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(104, 211, 145, 0.25);
             box-shadow:
-                0 6px 12px -2px rgba(0, 0, 0, 0.03),
-                0 20px 30px -8px rgba(0, 0, 0, 0.06),
-                inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+                0 6px 12px -2px rgba(104, 211, 145, 0.08),
+                0 20px 30px -8px rgba(47, 133, 90, 0.12),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.7),
+                0 0 0 1px rgba(104, 211, 145, 0.15);
             transform: translateY(-2px);
         }
 
         .logo {
             font-weight: 700;
             font-size: 1.05rem;
-            color: #111;
+            color: var(--text-main);
             display: flex;
             align-items: center;
             gap: 10px;
@@ -205,7 +235,7 @@
         .logo-icon {
             width: 30px;
             height: 30px;
-            background: linear-gradient(135deg, #10b981, #059669);
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-green-dark));
             border-radius: 8px;
             display: flex;
             align-items: center;
@@ -237,7 +267,7 @@
             opacity: 0;
             width: 0;
             pointer-events: none;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 2px 8px rgba(104, 211, 145, 0.1), 0 1px 2px rgba(47, 133, 90, 0.06);
         }
 
         .nav-link {
@@ -255,13 +285,13 @@
 
         .nav-link.active,
         .nav-link:hover {
-            color: #000;
+            color: var(--text-main);
         }
 
         .nav-btn {
             font-size: 0.85rem;
             font-weight: 600;
-            background: #171717;
+            background: var(--text-main);
             color: #fff;
             padding: 9px 20px;
             border-radius: 100px;
@@ -271,7 +301,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(47, 133, 90, 0.15);
             overflow: hidden;
             position: relative;
         }
@@ -289,8 +319,14 @@
 
         .nav-btn:hover {
             transform: translateY(-1px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            background: #000;
+            box-shadow: 0 8px 20px rgba(47, 133, 90, 0.25), 0 4px 8px rgba(104, 211, 145, 0.15);
+            background: var(--text-main);
+        }
+
+        .nav-btn:active {
+            transform: translateY(1px) scale(0.98);
+            box-shadow: 0 2px 6px rgba(47, 133, 90, 0.2);
+            transition: all 0.1s ease;
         }
 
         .nav-btn:hover::before {
@@ -336,12 +372,12 @@
             font-weight: 800;
             letter-spacing: -0.04em;
             line-height: 1.1;
-            color: #0a0a0a;
+            color: var(--text-main);
             margin-bottom: 24px;
         }
 
         h1 span {
-            background: linear-gradient(to right, #10b981, #3b82f6);
+            background: linear-gradient(to right, var(--accent-green), #4FD1C5);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -373,16 +409,16 @@
             font-size: 0.95rem;
             font-weight: 500;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
             text-decoration: none;
             overflow: hidden;
         }
 
         .btn-primary {
-            background: #171717;
+            background: var(--text-main);
             color: #fff;
-            border: 1px solid #171717;
-            box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--text-main);
+            box-shadow: 0 10px 20px -10px rgba(47, 133, 90, 0.35), 0 4px 8px -4px rgba(104, 211, 145, 0.2);
         }
 
         .btn-primary::before {
@@ -398,8 +434,14 @@
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 14px 24px -10px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 14px 28px -10px rgba(47, 133, 90, 0.4), 0 6px 12px -4px rgba(104, 211, 145, 0.25);
             animation: none;
+        }
+
+        .btn-primary:active {
+            transform: translateY(1px) scale(0.98);
+            box-shadow: 0 4px 10px -4px rgba(47, 133, 90, 0.3), inset 0 1px 2px rgba(0, 0, 0, 0.1);
+            transition: all 0.1s ease;
         }
 
         .btn-primary:hover::before {
@@ -432,15 +474,21 @@
         }
 
         .browser-mockup {
-            background: #fff;
-            border-radius: 12px;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.02);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 16px;
+            /* Crisp border for glassmorphic separation */
+            border: 1.5px solid rgba(104, 211, 145, 0.2);
+            box-shadow:
+                0 25px 50px -12px rgba(47, 133, 90, 0.18),
+                0 0 0 1px rgba(104, 211, 145, 0.1),
+                inset 0 1px 1px rgba(255, 255, 255, 0.9);
             overflow: hidden;
             transform-style: preserve-3d;
             will-change: transform;
-            transform: rotateX(20deg);
-            transition: transform 0.12s ease-out;
+            transform: rotateX(12deg) translateY(20px);
+            transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease, border-color 0.4s ease;
         }
 
         .toolbar {
@@ -578,7 +626,7 @@
             border: 1px solid rgba(0, 0, 0, 0.08);
             border-radius: 16px;
             padding: 20px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 25px 50px -12px rgba(47, 133, 90, 0.18);
             animation: float 6s ease-in-out infinite;
             transform-style: preserve-3d;
         }
@@ -629,26 +677,34 @@
         }
 
         .card {
-            background: var(--bg-card);
-            border: 1px solid rgba(0, 0, 0, 0.06);
+            background: linear-gradient(160deg, #ffffff, #f7f9f8);
+            border: 1px solid rgba(104, 211, 145, 0.1);
             border-radius: 24px;
-            padding: 36px;
+            padding: 40px;
             position: relative;
             overflow: hidden;
             cursor: default;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 300px;
-            box-shadow: var(--shadow-card);
+            min-height: 320px;
+            box-shadow:
+                0 4px 6px -1px rgba(104, 211, 145, 0.04),
+                0 10px 15px -3px rgba(47, 133, 90, 0.06),
+                0 0 0 1px rgba(104, 211, 145, 0.05),
+                inset 0 0 20px rgba(255, 255, 255, 0.8);
             transform-style: preserve-3d;
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 30px rgba(16, 185, 129, 0.3), 0 0 10px rgba(16, 185, 129, 0.1);
-            border-color: rgba(16, 185, 129, 0.4);
+            transform: translateY(-8px) scale(1.005);
+            box-shadow:
+                0 20px 40px -5px rgba(47, 133, 90, 0.12),
+                0 0 0 1px rgba(104, 211, 145, 0.3),
+                inset 0 0 20px rgba(255, 255, 255, 0.5);
+            border-color: rgba(104, 211, 145, 0.3);
+            background: linear-gradient(160deg, #ffffff, #f0fdf4);
         }
 
         .card.wide {
@@ -674,11 +730,14 @@
         }
 
         .icon-box {
-            width: 52px;
-            height: 52px;
-            background: #f3f4f6;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            border-radius: 14px;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #f6f8f7, #e8f5e9);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow:
+                0 2px 4px rgba(0, 0, 0, 0.02),
+                inset 0 1px 2px rgba(255, 255, 255, 0.8);
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -690,7 +749,7 @@
         .card:hover .icon-box {
             transform: scale(1.1) rotate(5deg);
             background: #fff;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 12px rgba(104, 211, 145, 0.12);
             color: var(--accent-green);
         }
 
@@ -819,7 +878,7 @@
 
         .step-item h3 {
             font-size: 2rem;
-            color: #111;
+            color: var(--text-main);
             margin-bottom: 16px;
             font-weight: 700;
         }
@@ -829,21 +888,21 @@
             position: sticky;
             top: 120px;
             height: 500px;
-            background: #111;
+            background: var(--text-main);
             border: 1px solid #333;
             border-radius: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 25px 50px -12px rgba(47, 133, 90, 0.3);
             align-self: flex-start;
             transition: box-shadow 0.3s ease, border-color 0.3s ease;
         }
 
         .details-visual:hover {
-            box-shadow: 0 0 40px rgba(16, 185, 129, 0.25);
-            border-color: rgba(16, 185, 129, 0.5);
+            box-shadow: 0 0 40px rgba(104, 211, 145, 0.25);
+            border-color: rgba(104, 211, 145, 0.5);
         }
 
         .terminal-text {
@@ -906,7 +965,7 @@
             border: 1px solid rgba(0, 0, 0, 0.08);
             border-radius: 24px;
             padding: 40px;
-            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 20px 40px -10px rgba(47, 133, 90, 0.12);
             position: relative;
             transform: rotate(-2deg);
             transition: transform 0.3s;
@@ -914,8 +973,8 @@
 
         .exam-card-visual:hover {
             transform: rotate(0deg) scale(1.02);
-            box-shadow: 0 0 30px rgba(16, 185, 129, 0.3);
-            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 0 30px rgba(104, 211, 145, 0.3);
+            border-color: rgba(104, 211, 145, 0.4);
         }
 
         .score-badge {
@@ -979,8 +1038,8 @@
         }
 
         .dash-card:hover {
-            box-shadow: 0 0 30px rgba(16, 185, 129, 0.3);
-            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 0 30px rgba(104, 211, 145, 0.3);
+            border-color: rgba(104, 211, 145, 0.4);
             transform: translateY(-3px);
         }
 
@@ -1038,8 +1097,8 @@
         }
 
         .testimonial-card:hover {
-            box-shadow: 0 0 25px rgba(16, 185, 129, 0.25);
-            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 0 25px rgba(104, 211, 145, 0.25);
+            border-color: rgba(104, 211, 145, 0.4);
             transform: translateY(-3px);
         }
 
@@ -1092,6 +1151,16 @@
             justify-content: space-between;
             align-items: center;
             color: #111;
+            transition: color 0.2s ease, transform 0.1s ease;
+            border-radius: 8px;
+        }
+
+        .faq-question:hover {
+            color: var(--accent-green-dark);
+        }
+
+        .faq-question:active {
+            transform: scale(0.99);
         }
 
         .faq-answer {
@@ -1146,7 +1215,7 @@
 
         .copy-command:hover {
             border-color: #ccc;
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px -10px rgba(47, 133, 90, 0.15);
             transform: translateY(-2px);
         }
 
@@ -1272,7 +1341,7 @@
             font-weight: 800;
             text-align: center;
             line-height: 1;
-            color: #000;
+            color: var(--text-main);
             opacity: 0;
             transform: scale(0.8) translateY(50px);
             filter: blur(20px);
@@ -1440,8 +1509,8 @@
 
         .demo-browser-window:hover {
             transform: rotateY(0) rotateX(0);
-            box-shadow: 0 0 40px rgba(16, 185, 129, 0.25);
-            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 0 40px rgba(104, 211, 145, 0.25);
+            border-color: rgba(104, 211, 145, 0.4);
         }
 
         .demo-content {
@@ -1467,13 +1536,13 @@
             background: #fff;
             padding: 16px;
             border-radius: 12px;
-            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 20px 40px -10px rgba(47, 133, 90, 0.25);
             width: 280px;
             opacity: 0;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             pointer-events: none;
             z-index: 10;
-            border: 1px solid rgba(16, 185, 129, 0.2);
+            border: 1px solid rgba(104, 211, 145, 0.2);
         }
 
         .highlight-anim:hover .ai-popover {
@@ -1542,7 +1611,7 @@
 
         .popover-badge {
             background: #d1fae5;
-            color: #059669;
+            color: var(--accent-green-dark);
             padding: 4px 8px;
             border-radius: 6px;
             font-size: 0.8rem;
@@ -1596,7 +1665,7 @@
             overflow: hidden;
             height: 420px;
             position: relative;
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 30px -10px rgba(104, 211, 145, 0.1);
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             display: flex;
             flex-direction: column;
@@ -1610,13 +1679,16 @@
 
         .panel-header {
             padding: 24px 32px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            /* Crisp border for glassmorphic separation */
+            border-bottom: 1px solid rgba(104, 211, 145, 0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             z-index: 10;
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
         }
 
         .panel-title {
@@ -2235,6 +2307,12 @@
             box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
         }
 
+        .mcq-card:active {
+            transform: scale(0.98);
+            box-shadow: 0 0 8px rgba(16, 185, 129, 0.4), inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: all 0.08s ease;
+        }
+
         .mcq-card.selected {
             background: #10b981;
             border-color: #10b981;
@@ -2286,11 +2364,15 @@
         .player-controls {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             padding: 20px;
             border-radius: 16px;
             display: flex;
             align-items: center;
             gap: 16px;
+            /* Crisp border for glassmorphic separation */
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
         }
 
         /* --- NEW: AI Media Drop --- */
@@ -2349,7 +2431,7 @@
             height: 80%;
             border: 1px solid #e5e5e5;
             border-radius: 12px;
-            box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 50px -10px rgba(47, 133, 90, 0.15);
             background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0MCIgZmlsbD0iI2YzZjRmNiIvPjwvc3ZnPg==');
             background-size: cover;
             display: flex;
@@ -2370,100 +2452,10 @@
             }
         }
 
-        .coming-soon-pill {
-            display: inline-flex;
-            align-items: center;
-            padding: 8px 20px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 100px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 32px;
-            color: #10b981;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
-            letter-spacing: 0.05em;
-        }
 
-        .coming-soon-pill:hover {
-            transform: translateY(-2px);
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(16, 185, 129, 0.4);
-            box-shadow: 0 10px 30px -5px rgba(16, 185, 129, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-            text-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
-        }
-
-        .pulse-dot {
-            width: 8px;
-            height: 8px;
-            background: #10b981;
-            border-radius: 50%;
-            margin-right: 10px;
-            box-shadow: 0 0 0 rgba(16, 185, 129, 0.4);
-            animation: pulse-green 2s infinite;
-        }
-
-        @keyframes pulse-green {
-            0% {
-                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
-            }
-
-            70% {
-                box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
-            }
-
-            100% {
-                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
-            }
-        }
 
         /* --- Coming Soon Section Styles --- */
-        .coming-soon-section {
-            padding: var(--section-spacing);
-            position: relative;
-            overflow: hidden;
-        }
 
-        .coming-soon-container {
-            max-width: 1150px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-            display: flex;
-            align-items: center;
-            gap: 80px;
-        }
-
-        .coming-soon-text {
-            flex: 1;
-        }
-
-        .coming-soon-title {
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 24px;
-            background: linear-gradient(to right, #111, #666);
-            /* Default light theme */
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        body.theme-dark .coming-soon-title {
-            background: linear-gradient(to right, #fff, #999);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .coming-soon-desc {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            margin-bottom: 40px;
-            max-width: 500px;
-            line-height: 1.6;
-        }
 
         .feature-pills {
             display: flex;
@@ -2502,10 +2494,7 @@
             font-weight: 600;
         }
 
-        .coming-soon-visual {
-            flex: 1;
-            position: relative;
-        }
+
 
         .coming-soon-glow {
             position: absolute;
@@ -2522,13 +2511,17 @@
         }
 
         .coming-soon-card {
-            background: rgba(255, 255, 255, 0.8);
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            background: rgba(255, 255, 255, 0.85);
+            /* Crisp border for glassmorphic separation */
+            border: 1.5px solid rgba(104, 211, 145, 0.12);
             border-radius: 24px;
             padding: 30px;
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             position: relative;
-            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.05);
+            box-shadow:
+                0 20px 40px -10px rgba(104, 211, 145, 0.1),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.5);
             transition: all 0.4s ease;
         }
 
@@ -2816,8 +2809,8 @@
                 <a href="#features" class="nav-link">Features</a>
                 <a href="#skills" class="nav-link">Skills</a>
                 <a href="#progress" class="nav-link">Advantage</a>
+                <a href="#roadmap" class="nav-link">In development</a>
                 <a href="#faq" class="nav-link">FAQ</a>
-                <a href="#comingSoon" class="nav-link">Coming Soon</a>
 
             </div>
 
@@ -2830,12 +2823,12 @@
 
     <!-- Hero -->
     <section class="hero-section skew-container" id="hero">
-        <div class="version-badge"><span></span> v2.1 Available</div>
-        <h1 class="reveal-on-scroll">Master Any Skill.<br><span>From Any Content.</span></h1>
-        <p class="lead reveal-on-scroll">The AI-powered extension that transforms every web page and video into an
-            interactive SAT, IELTS, and language tutor.</p>
+        <div class="version-badge"><span></span> v3.0 Cross-Platform</div>
+        <h1 class="reveal-on-scroll">Master Everything.<br><span>Anywhere. Anytime.</span></h1>
+        <p class="lead reveal-on-scroll">The personalized AI platform that turns your world into a classroom. Learn from
+            any content, on any device—not just valid for exams, but for life.</p>
         <div class="cta-group">
-            <a href="#" class="btn btn-primary magnet-target">Get App</a>
+            <a href="#" class="btn btn-primary magnet-target">Start Learning Free</a>
         </div>
         <div class="perspective-container">
             <div class="browser-mockup" id="mockup">
@@ -2876,45 +2869,113 @@
     <!-- Features Grid -->
     <section class="features-section skew-container" id="features">
         <div class="section-header">
-            <h2 class="reveal-on-scroll">Engineered for Learning</h2>
-            <p class="reveal-on-scroll text-muted">Your personal tutor, embedded in the browser.
+            <h2 class="reveal-on-scroll">Engineered for Lifelong Learning</h2>
+            <p class="reveal-on-scroll text-muted">Your personal AI mentor, synced across all your devices.
             </p>
         </div>
         <div class="bento-grid">
             <div class="card wide tilt-card">
+                <div class="card-bg-gradient"></div>
                 <div class="card-content">
-                    <div class="icon-box"><i data-lucide="graduation-cap"></i></div>
-                    <h3>Universal Exam Tutor</h3>
-                    <p class="scramble-text illuminate-text"
-                        data-value="Full SAT & IELTS support integrated into your daily browsing. Practice reading comprehension, grammar, and math reasoning on real-world articles.">
-                        Full SAT & IELTS support integrated into your daily browsing...</p>
+                    <div class="card-header-group">
+                        <div class="icon-box"><i data-lucide="brain"></i></div>
+                        <h3>Personalized Path</h3>
+                    </div>
+                    <p class="illuminate-text">Adaptive curriculum that evolves with you. Master any subject, from
+                        Coding to History.</p>
+
+                    <!-- New Mini Visual: Exam Card -->
+                    <div class="mini-visual-container" style="margin-top: auto; padding-top: 20px;">
+                        <div class="mock-exam-row"
+                            style="background: rgba(255,255,255,0.6); padding: 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                            <div style="width: 4px; height: 40px; background: #10b981; border-radius: 4px;"></div>
+                            <div style="flex: 1;">
+                                <div
+                                    style="height: 8px; width: 60%; background: #e5e7eb; border-radius: 4px; margin-bottom: 6px;">
+                                </div>
+                                <div style="height: 8px; width: 40%; background: #e5e7eb; border-radius: 4px;"></div>
+                            </div>
+                            <div style="font-weight: 700; color: #10b981; font-size: 0.9rem;">+15 XP</div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="card tilt-card">
                 <div class="card-content">
-                    <div class="icon-box"><i data-lucide="youtube"></i></div>
-                    <h3>Media to Lesson</h3>
-                    <p class="scramble-text illuminate-text"
-                        data-value="Instantly turn YouTube videos into interactive listening exercises with transcript parsing.">
-                        Instantly turn YouTube videos into interactive listening...</p>
+                    <div class="icon-box"><i data-lucide="sparkles"></i></div>
+                    <h3>Content to Context</h3>
+                    <p class="illuminate-text">Turn any video, podcast, or article into a deeply personalized lesson.
+                    </p>
+                    <div class="mini-visual-waveform"
+                        style="display: flex; gap: 3px; align-items: flex-end; height: 30px; margin-top: 20px; opacity: 0.6;">
+                        <div style="width: 4px; height: 40%; background: #ef4444; border-radius: 2px;"></div>
+                        <div style="width: 4px; height: 70%; background: #ef4444; border-radius: 2px;"></div>
+                        <div style="width: 4px; height: 100%; background: #ef4444; border-radius: 2px;"></div>
+                        <div style="width: 4px; height: 60%; background: #ef4444; border-radius: 2px;"></div>
+                        <div style="width: 4px; height: 30%; background: #ef4444; border-radius: 2px;"></div>
+                        <div style="width: 4px; height: 50%; background: #ef4444; border-radius: 2px;"></div>
+                    </div>
                 </div>
             </div>
             <div class="card tilt-card">
                 <div class="card-content">
                     <div class="icon-box"><i data-lucide="shield-check"></i></div>
                     <h3>Ethical AI</h3>
-                    <p class="scramble-text illuminate-text"
-                        data-value="Built for schools. Includes anti-cheat modes and facts-checking for focused learning.">
-                        Built for schools. Includes anti-cheat modes and facts-checking...</p>
+                    <p class="illuminate-text">Anti-cheat modes for focused learning.</p>
+                    <div style="margin-top: 20px; display: flex; gap: 8px;">
+                        <div
+                            style="padding: 6px 12px; background: #ecfdf5; color: #059669; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">
+                            Safe Mode</div>
+                        <div
+                            style="padding: 6px 12px; background: #f3f4f6; color: #666; border-radius: 100px; font-size: 0.75rem; font-weight: 600;">
+                            Verified</div>
+                    </div>
                 </div>
             </div>
             <div class="card wide tilt-card">
+                <div class="card-bg-gradient"></div>
                 <div class="card-content">
-                    <div class="icon-box"><i data-lucide="layers"></i></div>
-                    <h3>4-Skill Mastery</h3>
-                    <p class="scramble-text illuminate-text"
-                        data-value="The only extension covering Reading, Writing, Listening, and Speaking. Get pronunciation feedback and essay scoring in one tool.">
-                        The only extension covering Reading, Writing, Listening, and Speaking...</p>
+                    <div class="card-header-group">
+                        <div class="icon-box"><i data-lucide="layers"></i></div>
+                        <h3>Holistic Mastery</h3>
+                    </div>
+                    <p class="illuminate-text">Develop the core pillars of learning: Comprehension, Retention, and
+                        Critical Thinking.</p>
+                    <div class="skill-widgets-grid"
+                        style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 24px;">
+                        <div class="skill-widget"
+                            style="background: #eff6ff; border: 1px solid #dbeafe; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; transition: transform 0.2s;">
+                            <div
+                                style="width: 36px; height: 36px; background: #fff; border-radius: 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 6px rgba(37, 99, 235, 0.1);">
+                                <i data-lucide="book-open" size="18" color="#2563eb"></i>
+                            </div>
+                            <span style="font-size: 0.85rem; font-weight: 600; color: #1e3a8a;">Read</span>
+                        </div>
+                        <div class="skill-widget"
+                            style="background: #fefce8; border: 1px solid #fef9c3; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; transition: transform 0.2s;">
+                            <div
+                                style="width: 36px; height: 36px; background: #fff; border-radius: 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 6px rgba(202, 138, 4, 0.1);">
+                                <i data-lucide="pen-tool" size="18" color="#ca8a04"></i>
+                            </div>
+                            <span style="font-size: 0.85rem; font-weight: 600; color: #713f12;">Write</span>
+                        </div>
+                        <div class="skill-widget"
+                            style="background: #ecfdf5; border: 1px solid #d1fae5; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; transition: transform 0.2s;">
+                            <div
+                                style="width: 36px; height: 36px; background: #fff; border-radius: 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 6px rgba(5, 150, 105, 0.1);">
+                                <i data-lucide="mic" size="18" color="#059669"></i>
+                            </div>
+                            <span style="font-size: 0.85rem; font-weight: 600; color: #064e3b;">Speak</span>
+                        </div>
+                        <div class="skill-widget"
+                            style="background: #f0fdf4; border: 1px solid #dcfce7; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; transition: transform 0.2s;">
+                            <div
+                                style="width: 36px; height: 36px; background: #fff; border-radius: 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 6px rgba(22, 163, 74, 0.1);">
+                                <i data-lucide="headphones" size="18" color="#16a34a"></i>
+                            </div>
+                            <span style="font-size: 0.85rem; font-weight: 600; color: #14532d;">Listen</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2925,12 +2986,10 @@
         <div class="sticky-content">
             <section class="browser-demo-section skew-container" id="contextSection">
                 <div class="browser-demo-text" id="contextText">
-                    <h2 class="context-title">Context is King.</h2>
-                    <p class="context-desc">Don't just translate
-                        words.
-                        Understand them. Pro Learners analyzes the entire paragraph to give you definitions that
-                        actually make
-                        sense in context.</p>
+                    <h2 class="context-title">Contextual Intelligence.</h2>
+                    <p class="context-desc">
+                        Pro Learners analyzes your content to give you deep insights, summaries, and quizzes on the fly.
+                    </p>
                     <ul class="context-list">
                         <li class="context-item"><i data-lucide="check" size="20" color="#059669"></i> <span>Instant
                                 Grammar Breakdown</span></li>
@@ -2983,29 +3042,29 @@
     <div class="scroll-container" id="skills-scroll">
         <div class="sticky-wrapper">
             <div class="skills-header">
-                <h2 class="skills-title">Comprehensive Skillset</h2>
-                <p class="skills-desc">Everything you need to ace your exams and master languages.</p>
+                <h2 class="skills-title">Limitless Learning</h2>
+                <p class="skills-desc">Tools for lifelong learners, students, and professionals.</p>
             </div>
             <div class="scroll-track" id="scrollTrack">
                 <div class="tech-card">
                     <div class="icon-wrapper"><i data-lucide="book-open" size="32" color="#2563eb"></i></div>
-                    <h4>Reading</h4>
-                    <p>Summarization, mindmaps, and multilingual word replacement for rapid vocabulary acquisition.</p>
+                    <h4>Analysis</h4>
+                    <p>Summarization, mindmaps, and deep dives into any topic. Understand faster.</p>
                 </div>
                 <div class="tech-card">
                     <div class="icon-wrapper"><i data-lucide="pen-tool" size="32" color="#eab308"></i></div>
-                    <h4>Writing</h4>
-                    <p>Grammar explanation, essay rewriting, and instant feedback aligned with IELTS/SAT rubrics.</p>
+                    <h4>Creation</h4>
+                    <p>Essay rewriting, code refactoring, and creative writing feedback. Express yourself clearly.</p>
                 </div>
                 <div class="tech-card">
                     <div class="icon-wrapper"><i data-lucide="mic" size="32" color="#10b981"></i></div>
-                    <h4>Speaking</h4>
-                    <p>AI conversation simulation with real-time pronunciation scoring and fluency analysis.</p>
+                    <h4>Communication</h4>
+                    <p>Debate with AI, practice speeches, or mock interviews for your next big opportunity.</p>
                 </div>
                 <div class="tech-card">
                     <div class="icon-wrapper"><i data-lucide="headphones" size="32" color="#16a34a"></i></div>
-                    <h4>Listening</h4>
-                    <p>Comprehension quizzes generated from any audio source or video transcript.</p>
+                    <h4>Retention</h4>
+                    <p>Interactive quizzes and flashcards generated automatically from today's content.</p>
                 </div>
 
             </div>
@@ -3015,30 +3074,45 @@
     <!-- NEW: 4-Skills Grid (Premium) -->
     <section class="skills-grid-section skew-container" id="skills">
         <div class="section-header">
-            <h2 class="reveal-on-scroll">Complete Language Mastery</h2>
-            <p class="reveal-on-scroll text-muted">Four essential skills. One powerful platform.
+            <h2 class="reveal-on-scroll">Master Every Angle</h2>
+            <p class="reveal-on-scroll text-muted">Deep dive into any subject with specialized AI modes.
             </p>
         </div>
         <div class="four-skills-grid">
             <!-- Writing Panel -->
             <div class="skill-panel tilt-card">
                 <div class="panel-header">
-                    <div class="panel-title"><i data-lucide="pen-tool" size="20" color="#ef4444"></i> Writing Coach
+                    <div class="panel-title"><i data-lucide="pen-tool" size="20" color="#ef4444"></i> Smart Editor
                     </div>
                     <div class="panel-badge badge-red">Live Fix</div>
                 </div>
                 <div class="panel-body">
                     <div class="editor-ui">
-                        <p class="editor-comment">// Essay.txt</p>
-                        The impact of AI on society is <span class="editor-highlight">undeniable significant<div
-                                class="editor-tooltip">Grammar: undeniably significant</div></span>.
-                        It changes how we <span class="editor-highlight-2">communicate<div class="editor-tooltip">
-                                Synonym:
-                                interact</div></span> and learn.
-                        <br><br>
+                        <div style="display: flex; gap: 12px; margin-bottom: 20px; font-size: 0.8rem; color: #999;">
+                            <span>1</span>
+                            <span class="editor-comment">// Essay_Draft_v2.txt</span>
+                        </div>
+                        <div style="padding-left: 20px; border-left: 1px solid #f0f0f0;">
+                            The impact of AI on society is <span class="editor-highlight">undeniable significant<div
+                                    class="editor-tooltip">
+                                    <div style="font-weight: 600; margin-bottom: 4px;">Grammar Error</div>
+                                    Suggestion: "undeniably significant"
+                                </div></span>.
+                            It changes how we <span class="editor-highlight-2">communicate<div class="editor-tooltip">
+                                    <div style="font-weight: 600; margin-bottom: 4px;">Vocabulary</div>
+                                    Synonym: "interact"
+                                </div></span>.
+                        </div>
+                        <br>
                         <div class="editor-tags">
-                            <span class="editor-tag">#Coherence: 92%</span>
-                            <span class="editor-tag">#Vocab: 88%</span>
+                            <span class="editor-tag" style="background: #ecfdf5; color: #059669;">#Coherence: 92%</span>
+                            <span class="editor-tag" style="background: #eff6ff; color: #2563eb;">#Vocab: 8.5</span>
+                        </div>
+                        <div
+                            style="margin-top: 20px; width: 100%; height: 2px; background: #f0f0f0; position: relative;">
+                            <div
+                                style="position: absolute; left: 0; top: 0; height: 100%; width: 70%; background: #10b981;">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -3047,18 +3121,50 @@
             <!-- Speaking Panel -->
             <div class="skill-panel tilt-card">
                 <div class="panel-header">
-                    <div class="panel-title"><i data-lucide="mic" size="20" color="#10b981"></i> AI Tutor Call</div>
+                    <div class="panel-title"><i data-lucide="mic" size="20" color="#10b981"></i> AI Mentor</div>
                     <div class="panel-badge badge-green">Connected</div>
                 </div>
                 <div class="panel-body">
                     <div class="video-ui">
                         <div class="video-bg"></div>
-                        <div class="avatar-ring">
-                            <i data-lucide="bot" size="48" color="#fff"></i>
+
+                        <!-- Floating Conversation Bubbles -->
+                        <div class="conversation-float"
+                            style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; pointer-events: none;">
+                            <div
+                                style="align-self: flex-start; background: rgba(255,255,255,0.1); backdrop-filter: blur(4px); padding: 8px 16px; border-radius: 20px; border-bottom-left-radius: 4px; color: rgba(255,255,255,0.8); font-size: 0.85rem; transform: translateY(10px); opacity: 0.6;">
+                                ...how do I say "schedule" in UK vs US English?
+                            </div>
+                            <div
+                                style="align-self: flex-end; background: rgba(16, 185, 129, 0.2); backdrop-filter: blur(4px); padding: 8px 16px; border-radius: 20px; border-bottom-right-radius: 4px; color: #fff; font-size: 0.85rem; transform: translateY(-40px); border: 1px solid rgba(16, 185, 129, 0.3);">
+                                In the UK, it's "shed-yool"...
+                            </div>
                         </div>
-                        <div class="video-overlay">
-                            <p class="video-name">AI Tutor</p>
-                            <p class="video-status">Listening...</p>
+
+                        <div class="avatar-container"
+                            style="position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center;">
+                            <div class="avatar-ring"
+                                style="width: 100px; height: 100px; background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 0 50px rgba(16, 185, 129, 0.4); border: 2px solid rgba(255,255,255,0.2);">
+                                <i data-lucide="bot" size="40" color="#fff"></i>
+                            </div>
+                            <div style="margin-top: 24px; text-align: center;">
+                                <p class="video-name"
+                                    style="font-size: 1.2rem; margin-bottom: 4px; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">
+                                    AI Tutor (Emma)</p>
+                                <div
+                                    style="display: inline-flex; align-items: center; gap: 6px; background: rgba(0,0,0,0.4); padding: 4px 12px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.1);">
+                                    <span style="display: flex; gap: 3px; align-items: center;">
+                                        <span
+                                            style="width: 3px; height: 8px; background: #10b981; border-radius: 2px; animation: eq 1s ease-in-out infinite;"></span>
+                                        <span
+                                            style="width: 3px; height: 14px; background: #10b981; border-radius: 2px; animation: eq 1s ease-in-out infinite 0.1s;"></span>
+                                        <span
+                                            style="width: 3px; height: 6px; background: #10b981; border-radius: 2px; animation: eq 1s ease-in-out infinite 0.2s;"></span>
+                                    </span>
+                                    <span class="video-status"
+                                        style="font-size: 0.8rem; letter-spacing: 0.5px;">Speaking...</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -3069,25 +3175,39 @@
                 <div class="panel-header">
                     <div class="panel-title"><i data-lucide="book-open" size="20" color="#3b82f6"></i> Active Reading
                     </div>
-                    <div class="panel-badge badge-blue">SAT Mode</div>
+                    <div class="panel-badge badge-blue">Deep Dive</div>
                 </div>
                 <div class="panel-body">
-                    <div class="mcq-ui">
-                        <p class="mcq-question">What is the
-                            primary argument?</p>
-                        <div class="mcq-card">
-                            <div class="radio-circle"></div>
-                            <span>Technology hinders growth.</span>
-                        </div>
-                        <div class="mcq-card selected">
-                            <div class="radio-circle-selected">
+                    <div class="mcq-ui" style="justify-content: flex-start; padding-top: 24px;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; width: 100%;">
+                            <div style="display: flex; gap: 8px;">
+                                <div style="width: 40px; height: 4px; background: #10b981; border-radius: 4px;"></div>
+                                <div style="width: 40px; height: 4px; background: #10b981; border-radius: 4px;"></div>
+                                <div style="width: 40px; height: 4px; background: #e5e7eb; border-radius: 4px;"></div>
                             </div>
-                            <span>Adaptation is necessary.</span>
-                            <i data-lucide="check" size="18" class="check-icon-auto"></i>
+                            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #666;">04:12
+                            </div>
                         </div>
-                        <div class="mcq-card">
+
+                        <p class="mcq-question" style="font-size: 1rem; line-height: 1.5;">According to the paragraph,
+                            what is the primary benefit of renewable energy?</p>
+
+                        <div class="mcq-card selected"
+                            style="padding: 16px; border-radius: 12px; border: 2px solid #10b981; background: #ecfdf5;">
+                            <div class="radio-circle-selected"></div>
+                            <span style="color: #065f46; font-weight: 600;">Reduces carbon footprint</span>
+                            <i data-lucide="check-circle" size="16" color="#10b981" class="check-icon-auto"></i>
+                        </div>
+                        <div class="mcq-card"
+                            style="padding: 16px; border-radius: 12px; border: 1px solid #f0f0f0; opacity: 0.7;">
                             <div class="radio-circle"></div>
-                            <span>Economic shifts are random.</span>
+                            <span>Lowers production costs</span>
+                        </div>
+                        <div class="mcq-card"
+                            style="padding: 16px; border-radius: 12px; border: 1px solid #f0f0f0; opacity: 0.7;">
+                            <div class="radio-circle"></div>
+                            <span>Increases energy dependence</span>
                         </div>
                     </div>
                 </div>
@@ -3101,24 +3221,39 @@
                     <div class="panel-badge badge-yellow">Podcast</div>
                 </div>
                 <div class="panel-body">
-                    <div class="audio-ui">
-                        <div class="audio-visualizer">
-                            <div class="viz-bar" style="animation-delay:0s"></div>
-                            <div class="viz-bar" style="animation-delay:0.2s"></div>
-                            <div class="viz-bar" style="animation-delay:0.4s"></div>
-                            <div class="viz-bar" style="animation-delay:0.1s"></div>
-                            <div class="viz-bar" style="animation-delay:0.5s"></div>
-                            <div class="viz-bar" style="animation-delay:0.3s"></div>
+                    <div class="audio-ui" style="background: #111; position: relative; overflow: hidden;">
+
+                        <!-- Transcript Overlay -->
+                        <div
+                            style="flex: 1; padding: 0 0 20px; color: #888; font-size: 0.9rem; line-height: 1.6; mask-image: linear-gradient(to bottom, transparent, black 10%, black 80%, transparent);">
+                            <p>...welcome back to the <span style="color: #fff; font-weight: 500;">Science Weekly</span>
+                                podcast.</p>
+                            <p
+                                style="color: #fff; font-weight: 600; margin: 12px 0; padding-left: 12px; border-left: 2px solid #10b981;">
+                                Today we are discussing the breakthrough in fusion energy...</p>
+                            <p>This discovery could change everything about how we consume power.</p>
                         </div>
-                        <div class="player-controls">
-                            <div class="player-play-btn">
-                                <i data-lucide="play" size="18" color="#000" class="player-play-icon"></i>
-                            </div>
+
+                        <div class="audio-visualizer" style="height: 40px; margin-bottom: 20px;">
+                            <div class="viz-bar" style="height: 40%; animation-delay: 0s;"></div>
+                            <div class="viz-bar" style="height: 80%; animation-delay: 0.1s;"></div>
+                            <div class="viz-bar" style="height: 60%; animation-delay: 0.2s;"></div>
+                            <div class="viz-bar" style="height: 90%; animation-delay: 0.3s; background: #fff;"></div>
+                            <div class="viz-bar" style="height: 50%; animation-delay: 0.4s;"></div>
+                            <div class="viz-bar" style="height: 70%; animation-delay: 0.5s;"></div>
+                        </div>
+
+                        <div
+                            style="display: flex; align-items: center; gap: 12px; background: #222; padding: 12px; border-radius: 12px;">
+                            <div class="player-play-btn"><i data-lucide="pause" size="16" color="#000"
+                                    class="player-play-icon"></i></div>
                             <div class="player-info">
-                                <div class="player-title">The Future of AI</div>
-                                <div class="player-subtitle">TED Talks Daily</div>
+                                <div class="player-title" style="color: #fff;">Science Weekly Ep. 42</div>
+                                <div class="player-subtitle" style="color: #888;">Fusion Energy</div>
                             </div>
-                            <i data-lucide="list-music" size="20" class="player-list-icon"></i>
+                            <div style="width: 40px; height: 4px; background: #333; border-radius: 2px;">
+                                <div style="width: 60%; height: 100%; background: #10b981; border-radius: 2px;"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -3158,22 +3293,22 @@
         <div class="split-visual">
             <div class="exam-card-visual">
                 <div class="score-badge">
-                    <span class="score-label">SAT Reading Score</span>
-                    <span class="score-val">720 <span class="score-total-text">/
-                            800</span></span>
+                    <span class="score-label">Mastery Score</span>
+                    <span class="score-val">92 <span class="score-total-text">/
+                            100</span></span>
                 </div>
                 <div class="stats-container">
-                    <div class="stat-row"><span>Evidence-Based Reading</span> <span>92%</span></div>
+                    <div class="stat-row"><span>Critical Analysis</span> <span>92%</span></div>
                     <div class="progress-bar">
                         <div class="progress-fill" style="width:92%"></div>
                     </div>
                     <br>
-                    <div class="stat-row"><span>Grammar & Usage</span> <span>85%</span></div>
+                    <div class="stat-row"><span>Pattern Recognition</span> <span>85%</span></div>
                     <div class="progress-bar">
                         <div class="progress-fill" style="width:85%; background:#3370ea"></div>
                     </div>
                     <br>
-                    <div class="stat-row"><span>Vocabulary in Context</span> <span>78%</span></div>
+                    <div class="stat-row"><span>Contextual Vocab</span> <span>78%</span></div>
                     <div class="progress-bar">
                         <div class="progress-fill" style="width:78%; background:#eab308"></div>
                     </div>
@@ -3181,14 +3316,14 @@
             </div>
         </div>
         <div class="split-content">
-            <h2>Stop Guessing.<br><span class="text-accent-green">Start Scoring.</span></h2>
-            <p>Most students fail because they practice passively. Pro Learners forces active recall.</p>
-            <p>Our AI analyzes thousands of past SAT and IELTS papers to generate questions that match the exact
-                difficulty and style of the real exam—straight from the articles you actually want to read.</p>
+            <h2>Stop Consumerism.<br><span class="text-accent-green">Start Creating.</span></h2>
+            <p>Most people learn passively. Pro Learners forces active engagement.</p>
+            <p>Our AI analyzes your materials to generate challenges, questions, and projects that match your
+                skill level—straight from the content you consume.</p>
             <div class="checklist-group">
-                <div class="checklist-item"><i data-lucide="check-circle" size="18" color="#2563eb"></i> College Board
-                    Aligned</div>
-                <div class="checklist-item"><i data-lucide="check-circle" size="18" color="#2563eb"></i> Band 9 Criteria
+                <div class="checklist-item"><i data-lucide="check-circle" size="18" color="#2563eb"></i>
+                    Personalized Difficulty</div>
+                <div class="checklist-item"><i data-lucide="check-circle" size="18" color="#2563eb"></i> Active Recall
                 </div>
             </div>
         </div>
@@ -3236,13 +3371,13 @@
         <div class="marquee-header">
             <p class="community-label">
                 Community</p>
-            <h3 class="marquee-title">Trusted by 10,000+ Learners</h3>
+            <h3 class="marquee-title">Trusted by Learners</h3>
         </div>
         <div class="marquee-track">
             <!-- Repeated cards for infinite effect -->
             <div class="testimonial-card">
-                <p>"I used to struggle with IELTS Writing. This extension corrected my essays instantly. Got a Band
-                    8.0!"</p>
+                <p>"I used to struggle with academic writing. This app corrected my essays instantly. My grades
+                    skyrocketed!"</p>
                 <div class="user-info">
                     <div class="avatar" style="background:#ffedd5"></div>
                     <div><strong>Sarah L.</strong><br><span class="user-role">Student, London</span>
@@ -3277,8 +3412,8 @@
             </div>
             <!-- Duplicate for smooth loop -->
             <div class="testimonial-card">
-                <p>"I used to struggle with IELTS Writing. This extension corrected my essays instantly. Got a Band
-                    8.0!"</p>
+                <p>"I used to struggle with academic writing. This app corrected my essays instantly. My grades
+                    skyrocketed!"</p>
                 <div class="user-info">
                     <div class="avatar" style="background:#ffedd5"></div>
                     <div><strong>Sarah L.</strong><br><span class="user-role">Student, London</span>
@@ -3301,25 +3436,25 @@
             <h2 class="advantage-title">Unfair Advantage.</h2>
             <p class="advantage-desc">Stop juggling five different apps.
                 Pro Learners replaces your flashcards, grammar checker, tutor, and news reader with one powerful
-                extension.</p>
+                platform.</p>
             <ul class="advantage-list">
                 <li class="advantage-item">
                     <div class="advantage-icon-box">
                         <i data-lucide="layers" size="18" color="#059669"></i>
                     </div>
-                    <span class="advantage-text">All 4 Skills (R/W/L/S)</span>
+                    <span class="advantage-text">Unified Learning Ecosystem</span>
                 </li>
                 <li class="advantage-item">
                     <div class="advantage-icon-box">
                         <i data-lucide="graduation-cap" size="18" color="#059669"></i>
                     </div>
-                    <span class="advantage-text">Real SAT & IELTS Scoring</span>
+                    <span class="advantage-text">Adaptive AI Scoring</span>
                 </li>
                 <li class="advantage-item">
                     <div class="advantage-icon-box">
                         <i data-lucide="globe" size="18" color="#059669"></i>
                     </div>
-                    <span class="advantage-text">Works on ANY Website</span>
+                    <span class="advantage-text">Works Everywhere - Web & Mobile</span>
                 </li>
             </ul>
         </div>
@@ -3374,7 +3509,990 @@
         </div>
     </section>
 
-    <!-- NEW: FAQ Section -->
+    <!-- Enhanced Explainer Section -->
+    <style>
+        /* New Styles for Enhanced Sections */
+        .pipeline-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+        }
+
+        .pipeline-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            text-align: center;
+            width: 120px;
+        }
+
+        .pipeline-icon {
+            width: 60px;
+            height: 60px;
+            background: #f9fafb;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .pipeline-step:hover .pipeline-icon {
+            transform: scale(1.1);
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .pipeline-arrow {
+            color: #ccc;
+            animation: pulse-arrow 2s infinite;
+        }
+
+        .pipeline-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #666;
+        }
+
+        @keyframes pulse-arrow {
+            0% {
+                opacity: 0.3;
+                transform: translateX(0);
+            }
+
+            50% {
+                opacity: 1;
+                transform: translateX(5px);
+            }
+
+            100% {
+                opacity: 0.3;
+                transform: translateX(0);
+            }
+        }
+
+        /* Coming Soon Styles */
+        .coming-soon-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 1150px;
+            margin: 60px auto 0;
+        }
+
+        .coming-feature-card {
+            background: #fff;
+            border-radius: 24px;
+            padding: 40px;
+            border: 1px solid rgba(104, 211, 145, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 20px -4px rgba(104, 211, 145, 0.08);
+        }
+
+        .coming-feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -10px rgba(47, 133, 90, 0.15);
+            border-color: rgba(16, 185, 129, 0.4);
+        }
+
+        .coming-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            letter-spacing: 0.05em;
+        }
+
+        .pulse-dot-sm {
+            width: 6px;
+            height: 6px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: blink 1.5s infinite;
+        }
+
+        .coming-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #111;
+        }
+
+        .coming-desc {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .coming-visual-box {
+            height: 200px;
+            background: #f8fafc;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Simulation Visuals */
+        .sim-canvas {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .sim-node {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #cbd5e1;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .sim-node.active {
+            background: #3b82f6;
+            box-shadow: 0 0 10px #3b82f6;
+        }
+
+        .sim-path {
+            position: absolute;
+            height: 2px;
+            background: #e2e8f0;
+            transform-origin: left center;
+        }
+
+        /* Marketplace Visuals */
+        .market-ui {
+            width: 80%;
+            height: 80%;
+            display: flex;
+            gap: 10px;
+        }
+
+        .market-sidebar {
+            width: 30%;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .market-block {
+            height: 20px;
+            background: #f1f5f9;
+            border-radius: 4px;
+            border: 1px dashed #cbd5e1;
+        }
+
+        .market-canvas {
+            flex: 1;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 10px 10px;
+        }
+
+        /* Local AI Card - Full Width */
+        .coming-feature-card.full-width {
+            grid-column: span 2;
+        }
+
+        .local-ai-visual {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            height: 100%;
+            padding: 20px;
+        }
+
+        .local-ai-feature {
+            background: #fff;
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .local-ai-feature:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(104, 211, 145, 0.2);
+            border-color: rgba(16, 185, 129, 0.4);
+        }
+
+        .local-ai-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #059669;
+        }
+
+        .local-ai-label {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #111;
+        }
+
+        .local-ai-sublabel {
+            font-size: 0.85rem;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        /* Airplane/Offline Animation */
+        .offline-indicator {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #059669;
+        }
+
+        .offline-dot {
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: offlinePulse 2s infinite;
+        }
+
+        @keyframes offlinePulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+            }
+
+            50% {
+                opacity: 0.8;
+                box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+            }
+        }
+
+        /* Shield Animation */
+        .privacy-shield {
+            position: relative;
+        }
+
+        .privacy-shield::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 20px;
+            background: linear-gradient(45deg, rgba(16, 185, 129, 0.3), transparent, rgba(16, 185, 129, 0.3));
+            animation: shieldGlow 3s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes shieldGlow {
+
+            0%,
+            100% {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.02);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .coming-soon-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .coming-feature-card.full-width {
+                grid-column: span 1;
+            }
+
+            .local-ai-visual {
+                grid-template-columns: 1fr;
+            }
+
+            .pipeline-container {
+                flex-wrap: wrap;
+            }
+        }
+
+        /* --- Professional UI Elements --- */
+
+        /* Video Player */
+        .pro-video-player {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #000;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-screen {
+            flex: 1;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #111;
+            overflow: hidden;
+        }
+
+        .video-gradient-bg {
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle at 50% 50%, rgba(52, 211, 153, 0.2), transparent 60%);
+            animation: rotate-bg 10s linear infinite;
+        }
+
+        @keyframes rotate-bg {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .play-btn-glass {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+
+        .play-btn-glass:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .video-overlay-title {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.8rem;
+            font-weight: 500;
+            z-index: 2;
+        }
+
+        .video-controls-panel {
+            height: 60px;
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 8px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 4px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .progress-bar-track {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            position: relative;
+            overflow: visible;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: var(--accent-green);
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .progress-knob {
+            position: absolute;
+            right: -6px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 12px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .progress-container:hover .progress-knob {
+            opacity: 1;
+        }
+
+        .controls-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.8rem;
+        }
+
+        .left-controls,
+        .right-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .time-stamp {
+            font-variant-numeric: tabular-nums;
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+
+        /* Enhanced Nodes */
+        .sim-canvas.enhanced {
+            background: #f8fafc;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sim-grid-bg {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .sim-node-pro {
+            position: absolute;
+            background: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #444;
+            transition: all 0.3s ease;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+        }
+
+        .sim-node-pro.main {
+            width: 48px;
+            height: 48px;
+            background: var(--accent-green);
+            /* Matte green */
+            color: #fff;
+            box-shadow: 0 10px 20px rgba(52, 211, 153, 0.3);
+            border: none;
+        }
+
+        .sim-node-pro.sub {
+            width: 36px;
+            height: 36px;
+            background: #fff;
+            color: var(--text-muted);
+        }
+
+        .sim-node-pro:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .pulse {
+            animation: node-pulse 2s infinite;
+        }
+
+        @keyframes node-pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 15px rgba(52, 211, 153, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(52, 211, 153, 0);
+            }
+        }
+
+        .sim-connections {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .sim-connections line {
+            stroke: #e2e8f0;
+            stroke-width: 2;
+            stroke-dasharray: 4;
+            animation: dash 30s linear infinite;
+        }
+
+        @keyframes dash {
+            to {
+                stroke-dashoffset: -1000;
+            }
+        }
+
+        .code-float {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .code-line {
+            height: 4px;
+            background: #e2e8f0;
+            border-radius: 2px;
+        }
+
+        .w-80 {
+            width: 80px;
+        }
+
+        .w-60 {
+            width: 60px;
+        }
+
+        .w-40 {
+            width: 40px;
+        }
+
+        /* Course Builder UI */
+        .builder-ui {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            background: #fff;
+        }
+
+        .builder-sidebar {
+            width: 50px;
+            border-right: 1px solid #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            gap: 15px;
+            background: #f9fafb;
+        }
+
+        .tool-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .tool-icon:hover,
+        .tool-icon.active {
+            background: var(--accent-green-dim);
+            color: var(--accent-green-dark);
+        }
+
+        .builder-canvas {
+            flex: 1;
+            background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+            background-size: 20px 20px;
+            position: relative;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .drag-element {
+            width: 80%;
+            background: #fff;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+            margin: 0 auto;
+        }
+
+        .header-el {
+            height: 20px;
+            background: #e2e8f0;
+            width: 60%;
+        }
+
+        .image-el {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8fafc;
+            border-style: dashed;
+        }
+
+        .text-el {
+            height: 50px;
+            width: 90%;
+            background: #f9fafb;
+        }
+
+        .img-placeholder {
+            color: #ccc;
+        }
+
+        .ghost-element {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            padding: 8px 16px;
+            background: var(--accent-green);
+            color: #fff;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 10px 20px rgba(52, 211, 153, 0.4);
+            animation: float-ghost 3s ease-in-out infinite;
+        }
+
+        @keyframes float-ghost {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .floating-map-node {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-green);
+            z-index: 10;
+        }
+
+        .node-1 {
+            top: -20px;
+            right: -10px;
+            animation: float 5s ease-in-out infinite;
+        }
+
+        .node-2 {
+            bottom: -10px;
+            left: -10px;
+            animation: float 4s ease-in-out infinite reverse;
+        }
+    </style>
+
+    <section class="skew-container" id="explainer">
+        <div class="split-section">
+            <div class="split-content reveal-on-scroll">
+                <h2>
+                    Turn Context<br>into Content.
+                </h2>
+                <p>
+                    Input any website, PDF, or text. Our AI agent instantly breaks it down into a <strong>narrated
+                        explainer video</strong> and an <strong>interactive mindmap</strong>.
+                </p>
+
+                <div class="pipeline-container">
+                    <div class="pipeline-step">
+                        <div class="pipeline-icon">
+                            <i data-lucide="file-text" size="24"></i>
+                        </div>
+                        <span class="pipeline-label">Input Source</span>
+                    </div>
+                    <i data-lucide="arrow-right" class="pipeline-arrow"></i>
+                    <div class="pipeline-step">
+                        <div class="pipeline-icon">
+                            <i data-lucide="brain-circuit" size="24"></i>
+                        </div>
+                        <span class="pipeline-label">AI Processing</span>
+                    </div>
+                    <i data-lucide="arrow-right" class="pipeline-arrow"></i>
+                    <div class="pipeline-step">
+                        <div class="pipeline-icon">
+                            <i data-lucide="play-circle" size="24"></i>
+                        </div>
+                        <span class="pipeline-label">Video & Map</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="split-visual reveal-on-scroll">
+                <div class="coming-soon-glow"></div>
+                <div class="tilt-card coming-soon-card" style="position:relative; overflow: visible;">
+                    <!-- New Professional Video Player Mockup -->
+                    <div class="pro-video-player">
+                        <div class="video-screen">
+                        </div>
+                        <div class="video-controls-panel">
+                            <div class="progress-container">
+                                <div class="progress-bar-track">
+                                    <div class="progress-bar-fill" style="width: 65%;">
+                                        <div class="progress-knob"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="controls-row">
+                                <div class="left-controls">
+                                    <i data-lucide="play" size="18"></i>
+                                    <i data-lucide="volume-2" size="18"></i>
+                                    <span class="time-stamp">01:45 / 03:20</span>
+                                </div>
+                                <div class="right-controls">
+                                    <i data-lucide="settings" size="18"></i>
+                                    <i data-lucide="maximize" size="18"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Floating Mindmap Elements behind/around -->
+                    <div class="floating-map-node node-1">
+                        <i data-lucide="brain" size="14"></i>
+                    </div>
+                    <div class="floating-map-node node-2">
+                        <i data-lucide="lightbulb" size="14"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW: Coming Soon Section (Simulations & Marketplace) -->
+    <section class="features-section" id="roadmap">
+        <div class="section-header">
+            <div class="coming-soon-pill"
+                style="display:inline-flex; align-items:center; gap:8px; padding:8px 16px; background:#f3f4f6; border-radius:100px; font-size:0.8rem; font-weight:600; color:#666; margin-bottom:20px;">
+                <span class="pulse-dot"
+                    style="width:8px; height:8px; background:#4eed76; border-radius:50%; animation:blink 2s infinite;"></span>
+                IN DEVELOPMENT
+            </div>
+            <h2>The Future of Pro Learners</h2>
+            <p class="lead" style="opacity:1; animation:none; margin-bottom:0;">The ultimate active learning ecosystem.
+            </p>
+        </div>
+
+        <div class="coming-soon-grid">
+            <!-- Feature 1: Interactive Simulations -->
+            <div class="coming-feature-card">
+                <div class="coming-tag">
+                    <span class="pulse-dot-sm"></span> Interactive Labs
+                </div>
+                <h3 class="coming-title">Hands-on Simulations</h3>
+                <p class="coming-desc">
+                    Don't just read about Computer Science or Chemistry—play with it. Our AI generates custom
+                    <strong>interactive sandboxes, physics simulations, and algorithm visualizers</strong> tailored to
+                    your topic.
+                </p>
+                <div class="coming-visual-box professional-box">
+                    <div class="sim-canvas enhanced">
+                        <div class="sim-grid-bg"></div>
+                        <!-- Enhanced Node Graph -->
+                        <div class="sim-node-pro main pulse" style="top:50%; left:50%;">
+                            <i data-lucide="atom" size="20"></i>
+                        </div>
+                        <div class="sim-node-pro sub" style="top:25%; left:30%;">
+                            <i data-lucide="flask-conical" size="16"></i>
+                        </div>
+                        <div class="sim-node-pro sub" style="top:75%; left:70%;">
+                            <i data-lucide="binary" size="16"></i>
+                        </div>
+                        <div class="sim-node-pro sub" style="top:30%; left:75%;">
+                            <i data-lucide="calculator" size="16"></i>
+                        </div>
+
+                        <!-- Connecting Lines (SVG) -->
+                        <svg class="sim-connections">
+                            <line x1="50%" y1="50%" x2="30%" y2="25%" />
+                            <line x1="50%" y1="50%" x2="70%" y2="75%" />
+                            <line x1="50%" y1="50%" x2="75%" y2="30%" />
+                        </svg>
+
+                        <!-- Floating Code Snippet -->
+                        <div class="code-float">
+                            <div class="code-line w-80"></div>
+                            <div class="code-line w-60"></div>
+                            <div class="code-line w-40"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 2: Marketplace -->
+            <div class="coming-feature-card">
+                <div class="coming-tag">
+                    <span class="pulse-dot-sm"></span> Creator Economy
+                </div>
+                <h3 class="coming-title">Course Marketplace</h3>
+                <p class="coming-desc">
+                    Upload documents, write custom prompts, and build UI with our <strong>No-Code Drag & Drop
+                        Builder</strong>. Publish your interactive courses to the marketplace and earn from learners
+                    worldwide.
+                </p>
+                <div class="coming-visual-box professional-box">
+                    <div class="builder-ui">
+                        <div class="builder-sidebar">
+                            <div class="tool-icon"><i data-lucide="type" size="14"></i></div>
+                            <div class="tool-icon"><i data-lucide="image" size="14"></i></div>
+                            <div class="tool-icon active"><i data-lucide="check-square" size="14"></i></div>
+                            <div class="tool-icon"><i data-lucide="video" size="14"></i></div>
+                        </div>
+                        <div class="builder-canvas">
+                            <div class="drag-element header-el"></div>
+                            <div class="drag-element image-el">
+                                <div class="img-placeholder"><i data-lucide="image" size="20"></i></div>
+                            </div>
+                            <div class="drag-element text-el"></div>
+
+                            <!-- Ghost Element being dragged -->
+                            <div class="ghost-element">
+                                <i data-lucide="plus" size="12"></i> Drop here
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 3: Local AI -->
+            <div class="coming-feature-card full-width">
+                <div class="offline-indicator">
+                    <span class="offline-dot"></span>
+                    Works Offline
+                </div>
+                <div class="coming-tag">
+                    <span class="pulse-dot-sm"></span> On-Device Intelligence
+                </div>
+                <h3 class="coming-title">Local AI — Learn Anywhere, Anytime</h3>
+                <p class="coming-desc">
+                    No internet? No problem. Our <strong>on-device AI models</strong> run directly on your computer,
+                    giving you the full Pro Learners experience wherever you are—on a plane, in a remote cabin,
+                    or just avoiding slow coffee shop WiFi.
+                </p>
+                <div class="coming-visual-box professional-box" style="height: auto; min-height: 200px;">
+                    <div class="local-ai-visual">
+                        <!-- Offline Learning -->
+                        <div class="local-ai-feature">
+                            <div class="local-ai-icon">
+                                <i data-lucide="wifi-off" size="24"></i>
+                            </div>
+                            <span class="local-ai-label">100% Offline</span>
+                            <span class="local-ai-sublabel">Learn on planes, trains, or anywhere without internet</span>
+                        </div>
+
+                        <!-- Privacy -->
+                        <div class="local-ai-feature privacy-shield">
+                            <div class="local-ai-icon">
+                                <i data-lucide="shield-check" size="24"></i>
+                            </div>
+                            <span class="local-ai-label">Complete Privacy</span>
+                            <span class="local-ai-sublabel">Your data never leaves your device. Ever.</span>
+                        </div>
+
+                        <!-- No Queue -->
+                        <div class="local-ai-feature">
+                            <div class="local-ai-icon">
+                                <i data-lucide="zap" size="24"></i>
+                            </div>
+                            <span class="local-ai-label">Instant Response</span>
+                            <span class="local-ai-sublabel">No server queues. No waiting during peak hours.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
     <section class="faq-section pb-150" id="faq">
         <h2 class="faq-title">Frequently Asked Questions</h2>
 
@@ -3384,8 +4502,8 @@
                 <i data-lucide="plus" class="plus-icon"></i>
             </button>
             <div class="faq-answer">
-                Yes! Pro Learners injects a sidebar into any HTML page. It also has specific integrations for YouTube
-                (transcripts) and PDF viewers for academic papers.
+                Yes! Our browser extension works on any website, while our mobile app lets you learn on the go.
+                Seamlessly sync your progress across all devices.
             </div>
         </div>
         <div class="faq-item">
@@ -3394,8 +4512,8 @@
                 <i data-lucide="plus" class="plus-icon"></i>
             </button>
             <div class="faq-answer">
-                Yes. While the SAT/IELTS tutors are English-focused, the vocabulary, translation, and summarization
-                tools support over 40 languages including Spanish, French, Mandarin, and German.
+                Yes. Our AI supports over 40 languages including Spanish, French, Mandarin, and German for vocabulary,
+                translation, and summarization.
             </div>
         </div>
         <div class="faq-item">
@@ -3404,79 +4522,8 @@
                 <i data-lucide="plus" class="plus-icon"></i>
             </button>
             <div class="faq-answer">
-                The extension offers a free tier. We also offer a managed plan for schools and families.
-            </div>
-        </div>
-    </section>
-
-    <!-- NEW: Coming Soon Section -->
-    <section class="coming-soon-section skew-container" id="comingSoon">
-        <div class="coming-soon-container">
-            <div class="coming-soon-text reveal-on-scroll">
-                <div class="coming-soon-pill">
-                    <span class="pulse-dot"></span>
-                    COMING SOON
-                </div>
-                <h2 class="coming-soon-title">
-                    Instant Explainer.<br>From Anything.
-                </h2>
-                <p class="coming-soon-desc">
-                    Input any website, document, or text. Our AI will instantly generate a <strong>narrated explainer
-                        video</strong> and an <strong>interactive mindmap</strong> to help you visualize complex topics.
-                </p>
-                <div class="feature-pills">
-                    <div class="feature-pill">
-                        <i data-lucide="file-text" size="20"></i>
-                        <span>Documents</span>
-                    </div>
-                    <div class="feature-pill">
-                        <i data-lucide="link" size="20"></i>
-                        <span>URLs</span>
-                    </div>
-                    <i data-lucide="arrow-right" size="20" class="feature-arrow"></i>
-                    <div class="feature-pill highlight">
-                        <span>Video & Mindmap</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="coming-soon-visual reveal-on-scroll">
-                <div class="coming-soon-glow"></div>
-
-                <div class="tilt-card coming-soon-card">
-                    <!-- Mockup of the feature -->
-                    <div class="mock-file-row">
-                        <div class="mock-file-icon">
-                            <i data-lucide="file-text" size="24" color="#666"></i>
-                        </div>
-                        <div class="mock-file-content">
-                            <div class="mock-line w-80"></div>
-                            <div class="mock-line w-60"></div>
-                        </div>
-                    </div>
-
-                    <div class="mock-wand-row">
-                        <div class="magic-wand-circle">
-                            <i data-lucide="wand-2" size="20" color="#fff"></i>
-                        </div>
-                    </div>
-
-                    <div class="mock-grid-row">
-                        <div class="mock-video-thumb">
-                            <i data-lucide="play-circle" size="32" color="#fff"></i>
-                        </div>
-                        <div class="mock-mindmap-thumb">
-                            <div class="mindmap-circle-1">
-                            </div>
-                            <div class="mindmap-circle-2">
-                            </div>
-                            <div class="mindmap-circle-3">
-                            </div>
-                            <div class="mindmap-circle-4">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                Yes, Pro Learners is free to start. We also offer a Premium plan for unlimited AI analysis and a managed
+                plan for schools.
             </div>
         </div>
     </section>
@@ -3496,8 +4543,8 @@
         <div class="glow-orb footer-glow">
         </div>
         <div id="copyBtn" class="copy-command magnet-target">
-            <i id="copyIcon" data-lucide="terminal" size="16"></i>
-            <span id="commandText">npm install pro-learners-cli</span>
+            <i id="copyIcon" data-lucide="link" size="16"></i>
+            <span id="commandText">pro-learners.com/app</span>
             <i id="copyFeedback" data-lucide="copy" size="14" class="copy-feedback-icon"></i>
         </div>
         <div class="footer-bottom">
@@ -3545,7 +4592,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Exam Tutoring</td>
+                            <td>Personalized AI</td>
                             <td>
                                 <div class="check-icon"><i data-lucide="check" size="16"></i> Built-in</div>
                             </td>
@@ -3584,28 +4631,61 @@
         }
         animateCursor();
 
-        // Scroll Interactions
+        // Scroll Interactions (Optimized)
         const stickySection = document.querySelector('.scroll-container');
         const scrollTrack = document.getElementById('scrollTrack');
         const techCards = document.querySelectorAll('.tech-card');
+
+        let isScrolling = false;
+
         function animateHorizontalScroll() {
-            if (!stickySection || !scrollTrack) return;
+            if (!stickySection || !scrollTrack) {
+                isScrolling = false;
+                return;
+            }
+
             const rect = stickySection.getBoundingClientRect();
             const sectionHeight = stickySection.offsetHeight - window.innerHeight;
+
+            // Only calc if in view or near view
+            if (rect.top > window.innerHeight || rect.bottom < 0) {
+                isScrolling = false;
+                return;
+            }
+
             let scrollDistance = -rect.top;
             let progress = Math.max(0, Math.min(1, scrollDistance / sectionHeight));
+
             const trackWidth = scrollTrack.scrollWidth;
-            const translateX = progress * (trackWidth - window.innerWidth);
+            // Subtract window width so we stop exactly at the end
+            const translateX = progress * (trackWidth - window.innerWidth + 40); // +40 for padding
+
             scrollTrack.style.transform = `translateX(-${translateX}px)`;
+
+            // Optimize focus class toggle
             const viewportCenter = window.innerWidth / 2;
             techCards.forEach(card => {
                 const cardRect = card.getBoundingClientRect();
                 const cardCenter = cardRect.left + (cardRect.width / 2);
-                if (Math.abs(viewportCenter - cardCenter) < 300) card.classList.add('in-focus');
-                else card.classList.remove('in-focus');
+                const dist = Math.abs(viewportCenter - cardCenter);
+                if (dist < 350) { // Wider threshold
+                    if (!card.classList.contains('in-focus')) card.classList.add('in-focus');
+                } else {
+                    if (card.classList.contains('in-focus')) card.classList.remove('in-focus');
+                }
             });
-            requestAnimationFrame(animateHorizontalScroll);
+
+            isScrolling = false;
         }
+
+        window.addEventListener('scroll', () => {
+            if (!isScrolling) {
+                isScrolling = true;
+                requestAnimationFrame(animateHorizontalScroll);
+            }
+        }, { passive: true });
+
+        // Initial call
         animateHorizontalScroll();
 
         // Populate Heatmap
@@ -3757,7 +4837,8 @@
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left - rect.width / 2;
                 const y = e.clientY - rect.top - rect.height / 2;
-                card.style.transform = `perspective(1000px) rotateX(${y / -25}deg) rotateY(${x / 25}deg) scale3d(1.02, 1.02, 1.02)`;
+                // Reduced tilt intensity (higher divisor = less tilt)
+                card.style.transform = `perspective(1000px) rotateX(${y / -80}deg) rotateY(${x / 80}deg) scale3d(1.01, 1.01, 1.01)`;
             });
             card.addEventListener('mouseleave', () => card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)');
         });
