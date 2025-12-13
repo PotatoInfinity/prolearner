@@ -2867,7 +2867,152 @@
 
     <!-- Hero -->
     <section class="hero-section skew-container" id="hero">
-        <div class="version-badge"><span></span> v1.3 Cross-Platform</div>
+        <div class="version-badge"><span></span> v1.3 Cross Platform In Development</div>
+
+        <!-- Enhanced Countdown (Premium Polish) -->
+        <style>
+            .version-badge {
+                margin-bottom: 16px;
+                /* Closer to timer */
+            }
+
+            .version-badge span {
+                animation: pulse-status 2s infinite;
+            }
+
+            @keyframes pulse-status {
+                0% {
+                    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+                }
+
+                70% {
+                    box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+                }
+
+                100% {
+                    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+                }
+            }
+
+            .countdown-container {
+                display: flex;
+                gap: 12px;
+                margin-bottom: 40px;
+                opacity: 0;
+                animation: fadeUp 0.8s ease forwards 0.2s;
+                align-items: flex-start;
+                /* Align numbers top for visual balance with separators */
+            }
+
+            .time-box {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                background: rgba(255, 255, 255, 0.7);
+                backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.6);
+                padding: 12px 16px;
+                border-radius: 16px;
+                min-width: 68px;
+                /* Premium layered shadow for "float" effect */
+                box-shadow:
+                    0 4px 6px -1px rgba(16, 185, 129, 0.05),
+                    0 10px 15px -3px rgba(16, 185, 129, 0.05),
+                    inset 0 0 20px rgba(255, 255, 255, 0.5);
+                transition: transform 0.3s ease;
+            }
+
+            .time-box:hover {
+                transform: translateY(-2px);
+                box-shadow:
+                    0 10px 25px -5px rgba(16, 185, 129, 0.1),
+                    0 8px 10px -6px rgba(16, 185, 129, 0.05);
+            }
+
+            .time-val {
+                font-family: 'Inter', sans-serif;
+                /* Clean sans-serif */
+                font-variant-numeric: tabular-nums;
+                /* Stable width */
+                font-size: 1.75rem;
+                font-weight: 700;
+                color: var(--text-main);
+                /* Darker for contrast */
+                line-height: 1;
+                margin-bottom: 6px;
+                letter-spacing: -0.03em;
+            }
+
+            .time-label {
+                font-size: 0.6rem;
+                text-transform: uppercase;
+                letter-spacing: 0.15em;
+                color: #059669;
+                /* Desaturated/Darker Mint */
+                font-weight: 700;
+            }
+
+            .time-sep {
+                font-size: 1.5rem;
+                font-weight: 400;
+                color: var(--text-muted);
+                opacity: 0.4;
+                margin-top: 10px;
+                /* Vertically align with the numbers */
+            }
+
+            /* Custom Cursor Tooltip */
+            #cursor-tooltip {
+                position: fixed;
+                top: 0;
+                left: 0;
+                padding: 8px 16px;
+                background: rgba(20, 20, 20, 0.9);
+                color: #fff;
+                font-size: 0.8rem;
+                font-weight: 600;
+                border-radius: 99px;
+                pointer-events: none;
+                z-index: 9999;
+                opacity: 0;
+                transform: translate(20px, 20px);
+                transition: opacity 0.2s ease, transform 0.1s ease;
+                white-space: nowrap;
+                backdrop-filter: blur(8px);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+        </style>
+
+        <div id="release-countdown" class="countdown-container">
+            <div class="time-box">
+                <span id="cd-months" class="time-val">00</span>
+                <span id="lbl-months" class="time-label">Months</span>
+            </div>
+            <div class="time-sep">:</div>
+            <div class="time-box">
+                <span id="cd-days" class="time-val">00</span>
+                <span id="lbl-days" class="time-label">Days</span>
+            </div>
+            <div class="time-sep">:</div>
+            <div class="time-box">
+                <span id="cd-hours" class="time-val">00</span>
+                <span id="lbl-hours" class="time-label">Hours</span>
+            </div>
+            <div class="time-sep">:</div>
+            <div class="time-box">
+                <span id="cd-minutes" class="time-val">00</span>
+                <span id="lbl-minutes" class="time-label">Mins</span>
+            </div>
+            <div class="time-sep">:</div>
+            <div class="time-box">
+                <span id="cd-seconds" class="time-val">00</span>
+                <span id="lbl-seconds" class="time-label">Secs</span>
+            </div>
+        </div>
+
+        <div id="cursor-tooltip">Coming Soon</div>
+
         <h1 class="reveal-on-scroll">Master Everything.<br><span>Anywhere. Anytime.</span></h1>
         <p class="lead reveal-on-scroll">The personalized AI platform that turns your world into a classroom. Learn from
             any content, on any device—not just valid for exams, but for life.</p>
@@ -5070,6 +5215,71 @@
         }
 
         // Consolidate in handleScroll
+
+        // Countdown Timer Logic
+        function updateCountdown() {
+            const now = new Date();
+            // Updated Date: Feb 10th, 2026
+            const target = new Date('2026-02-10T00:00:00+07:00');
+
+            if (now >= target) {
+                const el = document.getElementById('release-countdown');
+                if (el) el.innerHTML = "Released!";
+                return;
+            }
+
+            let months = (target.getFullYear() - now.getFullYear()) * 12 + (target.getMonth() - now.getMonth());
+            if (target.getDate() < now.getDate()) {
+                months--;
+            }
+
+            const tempDate = new Date(now);
+            tempDate.setMonth(now.getMonth() + months);
+
+            const diffTime = target - tempDate;
+            const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diffTime % (1000 * 60)) / 1000);
+
+            const setVal = (id, val) => {
+                const el = document.getElementById(id);
+                if (el) el.innerText = String(val).padStart(2, '0');
+            };
+
+            setVal('cd-months', months);
+            setVal('cd-days', days);
+            setVal('cd-hours', hours);
+            setVal('cd-minutes', minutes);
+            setVal('cd-seconds', seconds);
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call
+
+        // Coming Soon Hover Logic
+        const tooltip = document.getElementById('cursor-tooltip');
+        const btns = document.querySelectorAll('.nav-btn, .cta-group .btn-primary');
+
+        if (tooltip) {
+            document.addEventListener('mousemove', (e) => {
+                // slightly offset from cursor
+                const x = e.clientX + 15;
+                const y = e.clientY + 15;
+                tooltip.style.transform = `translate(${x}px, ${y}px)`;
+            });
+
+            btns.forEach(btn => {
+                btn.addEventListener('mouseenter', () => {
+                    tooltip.style.opacity = '1';
+                });
+                btn.addEventListener('mouseleave', () => {
+                    tooltip.style.opacity = '0';
+                });
+                // Disable click
+                btn.addEventListener('click', (e) => e.preventDefault());
+            });
+        }
 
     </script>
 </body>
