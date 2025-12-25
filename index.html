@@ -5228,12 +5228,21 @@
             }
 
             let months = (target.getFullYear() - now.getFullYear()) * 12 + (target.getMonth() - now.getMonth());
+
+            // Initial adjustment based on day of month to avoid basic overshoot
             if (target.getDate() < now.getDate()) {
                 months--;
             }
 
-            const tempDate = new Date(now);
+            // Verify we haven't overshot based on exact time
+            let tempDate = new Date(now);
             tempDate.setMonth(now.getMonth() + months);
+
+            if (tempDate > target) {
+                months--;
+                tempDate = new Date(now);
+                tempDate.setMonth(now.getMonth() + months);
+            }
 
             const diffTime = target - tempDate;
             const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
